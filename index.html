@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGL Spammer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #000000, #434343, #383838, #1f1f1f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeInScale 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            display: inline-block;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            color: #fff;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: formSlideIn 1s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        @keyframes formSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        input, textarea, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #333;
+            color: #fff;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            background: #444;
+            border-color: #007bff;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding to ensure spacing */
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #ff6b6b, #f06595, #d63d75, #b11d68);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.7), 0 0 25px rgba(255, 0, 0, 0.7);
+            animation: textGlow 2s ease-in-out infinite;
+            position: relative; /* Ensure header stays in place */
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 15px rgba(255, 105, 180, 0.7), 0 0 25px rgba(255, 0, 0, 0.7); }
+            50% { text-shadow: 0 0 25px rgba(255, 105, 180, 0.9), 0 0 40px rgba(255, 0, 0, 0.9); }
+            100% { text-shadow: 0 0 15px rgba(255, 105, 180, 0.7), 0 0 25px rgba(255, 0, 0, 0.7); }
+        }
+
+        .info {
+            font-size: 0.9em;
+            color: #ddd;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s 1.2s forwards;
+        }
+
+        .notice {
+            font-size: 0.9em;
+            color: #ffcc00;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeIn 1s 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            input, textarea, select {
+                width: calc(100% - 20px);
+            }
+
+            form {
+                padding: 15px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            button {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            button {
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NGL Spammer Tool</h1>
+        <form action="/send_attack" method="post">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <textarea name="custom_message" placeholder="Enter Custom Message (if selected)" rows="4"></textarea>
+            <select name="message_type">
+                <option value="custom">Custom Message</option>
+                <option value="heart">Heart Spam</option>
+                <option value="fuck">Fuck Spam</option>
+                <option value="crash">Inbox Crash</option>
+            </select>
+            <input type="number" name="interval" placeholder="Delay (seconds)" min="1" required>
+            <label>
+                <input type="checkbox" name="continuous"> Continuous
+            </label>
+            <button type="submit">Send Attack</button>
+            <div class="notice" id="notice"></div>
+        </form>
+        <div class="info">
+            <p>Note: Do not include '@' in the username.</p>
+            <p>&copy; Zedric</p>
+        </div>
+    </div>
+
+    <script>
+        // Add notices based on selected options
+        const form = document.querySelector('form');
+        const messageType = form.querySelector('select[name="message_type"]');
+        const continuous = form.querySelector('input[name="continuous"]');
+        const notice = document.getElementById('notice');
+
+        function updateNotice() {
+            let noticeText = '';
+            if (!continuous.checked) {
+                noticeText += 'The message will not spam until you enable the Continuous option. ';
+            }
+            if (messageType.value === 'crash') {
+                noticeText += 'Warning: The Inbox Crash feature is actually working.';
+            }
+            notice.innerText = noticeText;
+        }
+
+        messageType.addEventListener('change', updateNotice);
+        continuous.addEventListener('change', updateNotice);
+
+        updateNotice(); 
+    </script>
+</body>
+</html>
